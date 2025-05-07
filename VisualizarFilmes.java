@@ -1,104 +1,97 @@
 package Pacote;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.awt.*;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.GridLayout;
-import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
-import javax.swing.JTextPane;
-import java.awt.Color;
+import javax.swing.border.LineBorder;
 
 public class VisualizarFilmes extends JFrame {
 
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VisualizarFilmes frame = new VisualizarFilmes();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    public static void main(String[] args) {
+        EventQueue.invokeLater(() -> {
+            try {
+                VisualizarFilmes frame = new VisualizarFilmes();
+                frame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
 
-	/**
-	 * Create the frame.
-	 */
-	public VisualizarFilmes() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBackground(Color.BLUE);
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+    public VisualizarFilmes() {
+        setTitle("Filmes Disponíveis");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 600, 500);
+        contentPane = new JPanel();
+        contentPane.setBackground(new Color(30, 30, 60));
+        contentPane.setBorder(new EmptyBorder(15, 15, 15, 15));
+        setContentPane(contentPane);
+        contentPane.setLayout(new BorderLayout(10, 10));
 
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("Um Filme Minecraft");
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel.setBounds(10, 0, 153, 14);
-		contentPane.add(lblNewLabel);
-		
-		JTextArea BiodoFilmeMine = new JTextArea();
-		BiodoFilmeMine.setFont(new Font("Monospaced", Font.BOLD, 13));
-		BiodoFilmeMine.setText("Uma aventura divertida para toda a família.");
-		BiodoFilmeMine.setLineWrap(true);
-		BiodoFilmeMine.setWrapStyleWord(true);
-		BiodoFilmeMine.setBounds(10, 22, 414, 23);
-		contentPane.add(BiodoFilmeMine);
-		
-		JButton btnNewButton = new JButton("Solicitar");
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnNewButton.setBounds(10, 56, 89, 23);
-		contentPane.add(btnNewButton);
-		
-		JLabel lblNewLabel_1 = new JLabel("Sonic 3");
-		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblNewLabel_1.setBounds(10, 90, 46, 14);
-		contentPane.add(lblNewLabel_1);
-		
-		JTextArea txtrSonicKnucklesE = new JTextArea();
-		txtrSonicKnucklesE.setFont(new Font("Monospaced", Font.BOLD, 13));
-		txtrSonicKnucklesE.setText("Sonic, Knuckles e Tails estão de volta para uma aventura épica");
-		txtrSonicKnucklesE.setBounds(10, 110, 414, 23);
-		contentPane.add(txtrSonicKnucklesE);
-		
-		JLabel lblNewLabel_2 = new JLabel("Ben 10");
-		lblNewLabel_2.setForeground(Color.WHITE);
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblNewLabel_2.setBounds(10, 172, 46, 14);
-		contentPane.add(lblNewLabel_2);
-		
-		JTextArea txtrBenDeveEnfrentar = new JTextArea();
-		txtrBenDeveEnfrentar.setFont(new Font("Monospaced", Font.BOLD, 13));
-		txtrBenDeveEnfrentar.setText("Não perca a estreia do Ben 10 contra o Universo");
-		txtrBenDeveEnfrentar.setBounds(10, 197, 414, 22);
-		contentPane.add(txtrBenDeveEnfrentar);
-		
-		JButton btnNewButton_1 = new JButton("Solicitar");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnNewButton_1.setBounds(10, 144, 89, 23);
-		contentPane.add(btnNewButton_1);
-		
-		JButton btnNewButton_2 = new JButton("Solicitar");
-		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnNewButton_2.setBounds(10, 227, 89, 23);
-		contentPane.add(btnNewButton_2);
-	}
+        JLabel titulo = new JLabel("Filmes em Cartaz");
+        titulo.setFont(new Font("Verdana", Font.BOLD, 22));
+        titulo.setForeground(Color.WHITE);
+        titulo.setHorizontalAlignment(SwingConstants.CENTER);
+        contentPane.add(titulo, BorderLayout.NORTH);
+
+        JPanel filmesPanel = new JPanel();
+        filmesPanel.setOpaque(false);
+        filmesPanel.setLayout(new GridLayout(0, 1, 15, 15)); // lista vertical
+
+        filmesPanel.add(criarCardFilme("Um Filme Minecraft", "Uma aventura divertida para toda a família."));
+        filmesPanel.add(criarCardFilme("Sonic 3", "Sonic, Knuckles e Tails estão de volta para uma aventura épica."));
+        filmesPanel.add(criarCardFilme("Ben 10", "Não perca a estreia do Ben 10 contra o Universo."));
+
+        JScrollPane scroll = new JScrollPane(filmesPanel);
+        scroll.setBorder(null);
+        scroll.setOpaque(false);
+        scroll.getViewport().setOpaque(false);
+        contentPane.add(scroll, BorderLayout.CENTER);
+    }
+
+    private JPanel criarCardFilme(String titulo, String descricao) {
+        JPanel card = new JPanel();
+        card.setBackground(new Color(70, 130, 180));
+        card.setBorder(new LineBorder(Color.WHITE, 2, true));
+        card.setLayout(new BorderLayout(10, 10));
+        card.setPreferredSize(new Dimension(550, 100));
+        card.setMaximumSize(new Dimension(550, 100));
+
+        JLabel lblTitulo = new JLabel(titulo);
+        lblTitulo.setFont(new Font("Arial", Font.BOLD, 16));
+        lblTitulo.setForeground(Color.WHITE);
+        lblTitulo.setBorder(new EmptyBorder(5, 10, 0, 10));
+
+        JTextArea areaDescricao = new JTextArea(descricao);
+        areaDescricao.setWrapStyleWord(true);
+        areaDescricao.setLineWrap(true);
+        areaDescricao.setEditable(false);
+        areaDescricao.setFont(new Font("Arial", Font.PLAIN, 13));
+        areaDescricao.setForeground(Color.WHITE);
+        areaDescricao.setBackground(new Color(70, 130, 180));
+        areaDescricao.setBorder(new EmptyBorder(0, 10, 0, 10));
+
+        JButton btnSolicitar = new JButton("Solicitar");
+        btnSolicitar.setFocusPainted(false);
+        btnSolicitar.setFont(new Font("Arial", Font.BOLD, 12));
+        btnSolicitar.setBackground(new Color(245, 245, 245));
+        btnSolicitar.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        btnSolicitar.setForeground(Color.BLACK);
+        btnSolicitar.addActionListener(e -> {
+            JOptionPane.showMessageDialog(this, "Solicitação enviada para: " + titulo);
+        });
+
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        bottomPanel.setOpaque(false);
+        bottomPanel.add(btnSolicitar);
+
+        card.add(lblTitulo, BorderLayout.NORTH);
+        card.add(areaDescricao, BorderLayout.CENTER);
+        card.add(bottomPanel, BorderLayout.SOUTH);
+
+        return card;
+    }
 }
