@@ -1,0 +1,1 @@
+CineFácil é um projeto desenvolvido para tornar a experiência de ir ao cinema mais simples e prática. Com ele, é possível visualizar sessões, encontrar cinemas próximos, comprar ingressos com facilidade e receber sugestões personalizadas de filmes. Uma solução pensada para quem ama cinema e quer aproveitar ao máximo, sem complicação.
